@@ -1,0 +1,31 @@
+<div class="container-fluid d-flex align-items-center justify-content-center" style="height: 100vh;"
+    id="containerLogin">
+    <div class="row">
+        <div class="col">
+            <div class="card text-center" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">El Buen Sabor</h5>
+                    <form [formGroup]="formulario" (ngSubmit)="submitForm()" class="p-3">
+                        <div class="form-group">
+                            <label for="calle">Email</label>
+                            <input class="form-control" formControlName="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="calle">Contraseña</label>
+                            <input class="form-control" formControlName="password" type="password">
+                        </div>
+                        <div id="error" class="mb-3 red">{{error}}</div>
+                        <input type="submit" value="Enviar" class="btn btn-primary w-100">
+                    </form>
+
+                    <a [routerLink]="['/Registro']" class="p-2">Registrarse</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>

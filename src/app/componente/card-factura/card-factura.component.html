@@ -1,0 +1,53 @@
+<div class="card" style="max-width: 100%;margin-bottom:20px;">              
+    <h4 class="card-header">El Buen Sabor</h4>
+<div class="card-body">
+    
+    <h5 class="card-title">Factura N° {{factura.id}}</h5>
+    <div class="row">
+        <div class="col-md-3">
+            <p><b>Fecha: </b>{{factura.fecha | date}}</p>
+            <p><b>Pedido N° {{factura.Pedido.id}}</b></p>
+            <p><b>Tipo de Envío: </b>{{(factura.Pedido.tipoEnvio == 'local' ? 'Retiro en el local' : 'Envío a domicilio')}}</p>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-3">
+            <p><b>Cliente: </b>{{factura.Pedido.Cliente.apellido}}, {{factura.Pedido.Cliente.nombre}}</p>
+            <p><b>Teléfono: </b>{{factura.Pedido.Cliente.telefono}}</p>
+            <p><b>Domicilio: </b>{{factura.Pedido.Cliente.Domicilio.calle}} {{factura.Pedido.Cliente.Domicilio.numero}}, {{factura.Pedido.Cliente.Domicilio.localidad }}</p>
+        </div> 
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Descripción</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let detalle of factura.Pedido.DetallePedidos">
+                    <th scope="row">{{(detalle.Articulo === null ? detalle.ArticuloManufacturado.denominacion : detalle.Articulo.denominacion)}}</th>
+                    <td>{{(detalle.Articulo === null ? detalle.ArticuloManufacturado.precioVenta : detalle.Articulo.precioVenta) | currency}}</td>
+                    <td>{{detalle.cantidad}}</td>
+                    <td>{{detalle.subtotal | currency}}</td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class="card-footer">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-3">
+            <p><b>Subtotal: </b>{{factura.total + factura.montoDescuento | currency}}</p>
+            <p><b>Descuento: </b>{{factura.montoDescuento | currency}}</p>
+            <hr>
+            <p><b>Total: </b>{{factura.total | currency}}</p>
+        </div> 
+    </div>
+</div>
+</div>

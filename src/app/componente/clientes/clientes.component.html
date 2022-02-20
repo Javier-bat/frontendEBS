@@ -1,0 +1,63 @@
+<!-- Modal Rubro articulo -->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar personal</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formulario" (ngSubmit)="submit()">
+            <div class="form-group">
+                <label for="calle">Email</label>
+                <input class="form-control" formControlName="email">
+            </div>
+            <div class="form-group">
+                <label for="calle">Contraseña</label>
+                <input class="form-control" formControlName="password">
+            </div>
+
+
+            <input type="submit" value="Enviar" class="btn btn-primary w-50 ">
+        </form>
+    </div>
+
+</ng-template>
+
+
+<div class="container pt-1">
+    <div class="row my-4 align-self-center">
+        <div class="col">
+            <button class="btn btn-primary" (click)="open(content)">Agregar</button>
+        </div>
+        <div class="col-md-4 text-center">
+            <h5>Personal de la empresa</h5>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Email</th>
+                        <th scope="col">Tipo</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios; index as i">
+                        <td>
+                            {{ usuario.email }}
+                        </td>
+                        <td>{{ usuario.tipo }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>

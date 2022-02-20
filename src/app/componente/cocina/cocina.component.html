@@ -1,0 +1,54 @@
+<ng-template #content let-c="cerrar" let-d="dismiss" class="modal-lg">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Editar Hora de Entrega</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formularioCambioHora" (ngSubmit)="actualizarHoraEstimada()">
+                    <input type="hidden" formControlName="id">
+                    <div class="form-group">
+                        <label for="calle">Hora estimada</label>
+                        <input class="form-control" formControlName="horaEstimadaFin" placeholder="00:00">
+                    </div>
+                    <input type="submit" value="Modificar" class="btn btn-primary w-50 ">
+                </form>
+            </div>
+
+</ng-template>
+<div class="container pt-1">
+    <div class="row">
+        <div class="col-sm">
+        </div>
+        <div class="col-sm">
+            <br>
+            <h4>Pedidos Actuales</h4>
+        </div>
+        <div class="col-sm">
+        </div>
+    </div>
+    <br>
+    <div class="card card-body" style="margin-bottom: 20px">
+        <h5 class="card-title">Pendientes</h5>
+        <hr>
+        <div class="row" style="justify-content: space-around;">
+            <div *ngIf="((filtrarPedidosPorEstado('pendiente')).length == 0)" class="alert alert-secondary" style="width: 100%;" role="alert">Sin pedidos pendientes.</div>
+            <div *ngFor="let pedido of filtrarPedidosPorEstado('pendiente')" >
+                <app-card-pedido-cocina (cambioHoraEstimadaEvent) = "abrirModalHora($event,content)" (cambioEstadoEvent) = "actualizarEstadoPedido($event)"  [pedido]="pedido">
+                </app-card-pedido-cocina>
+            </div>
+        </div>
+    </div>
+    <div class="card card-body" style="justify-content:space-around;">
+        <h5 class="card-title">En Preparación</h5>
+        <hr>
+        <div class="row" style="justify-content: space-around;">
+            <div *ngIf="((filtrarPedidosPorEstado('en preparacion')).length == 0)" class="alert alert-secondary" style="width: 100%;" role="alert">Sin pedidos en preparación.</div>
+            <div *ngFor="let pedido of filtrarPedidosPorEstado('en preparacion')" >
+                <app-card-pedido-cocina (cambioHoraEstimadaEvent) = "abrirModalHora($event,content)" (cambioEstadoEvent) = "actualizarEstadoPedido($event)"  [pedido]="pedido">
+                </app-card-pedido-cocina>
+            </div>
+        </div>
+    </div>
+</div>

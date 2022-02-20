@@ -1,0 +1,33 @@
+<div>
+    <div style="display: block">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="periodo"><b>Período</b></label>
+            <select [formControl] = "opcionSeleccionado" class="form-control" id="periodo" #periodo (change) = "seleccionarPeriodo()">
+              <option [selected]="true" value="historico">Histórico</option>
+              <option value="periodo">Seleccionar período</option>
+            </select>
+        </div>
+        <div class="col-md-9">
+          <form *ngIf="seleccionado" [formGroup] = "periodoForm" class="row" (ngSubmit)="buscarPorPeriodo()">
+            <label><b>Desde</b></label>
+            <input formControlName="desde" required type="date" class="form-control mb-2 mr-sm-2">
+            <label><b>Hasta</b></label>
+            <input formControlName="hasta" required type="date" class="form-control mb-2 mr-sm-2" >
+            
+           <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
+          </form>
+        </div>
+        <div class="col-md-3">
+          
+      </div>
+      </div>
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+      </canvas>
+    </div>
+  </div>

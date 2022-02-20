@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+.bi{
+    font-size: 31px;
+}
+.form-control,.btn{
+    border-radius: 20px;
+    transition: .5s;
+}
+.container{
+    margin-top: 56px;
+}
+.red{
+    color: red;
+}

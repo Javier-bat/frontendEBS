@@ -1,0 +1,120 @@
+<!-- Modal agregar ingrediente -->
+<ng-template #contentAgregar let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar ingrediente</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formularioInsumo" (ngSubmit)="submitIngrediente(contentAgregar)">
+            <div class="form-group">
+                <label for="calle">Artículo</label>
+                <select class="form-control" formControlName="idArticulo">
+                    <option value="">Seleccione un Valor</option>
+                    <ng-container *ngFor="let insumo of insumos; index as i">
+                        <option value="{{insumo.id}}">{{insumo.denominacion}}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="calle">Cantidad</label>
+                <input class="form-control" formControlName="cantidad">
+            </div>
+            <div id="error" class="mb-3 red">{{errorRubro}}</div>
+            <input type="submit" value="Enviar" class="btn btn-primary w-50 ">
+        </form>
+    </div>
+
+</ng-template>
+<!-- Modal Rubro articulo -->
+<ng-template #content let-c="cerrar" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Nuevo Articulo manufacturado</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formulario" (ngSubmit)="submitArticuloManufacturado()">
+            <input type="hidden" formControlName="id">
+            <div class="form-group">
+                <label for="calle">Denominacion</label>
+                <input class="form-control" formControlName="denominacion">
+            </div>
+            <div class="form-group">
+                <label for="calle">Tiempo Estimado Cocina</label>
+                <input class="form-control" formControlName="tiempoEstimadoCocina">
+            </div>
+            <div class="form-group">
+                <label for="calle">Precio de Venta</label>
+                <input class="form-control" formControlName="precioVenta">
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h5>Ingredientes</h5>
+                </div>
+                <div class="col text-right">
+                    <button class="btn btn-primary"
+                        (click)="abrirModal(contentAgregar); $event.preventDefault()">Añadir</button>
+                </div>
+
+            </div>
+            <ul class="list-group mt-2 d-flex">
+                <li class="list-group-item d-flex align-items-center"
+                    *ngFor="let insumo of articulosInternos; index as i">
+                    <span *ngIf="insumo.Articulo != null && insumo.Articulo != undefined">
+                        {{insumo.Articulo.denominacion}}
+                    </span>
+                    <span *ngIf="insumo.Articulo == null || insumo.Articulo == undefined">
+                        {{insumo.denominacion}}
+                    </span><span>&nbsp;X {{insumo.cantidad}}</span>
+                    <span class="ml-auto">
+                        <div class="btn btn-primary" (click)="eliminarIngrediente(insumo)">Eliminar</div>
+                    </span>
+                </li>
+
+            </ul>
+            <div id="error" class="mb-3 red">{{errorRubro}}</div>
+            <input type="submit" value="Enviar" class="btn btn-primary w-50 ">
+        </form>
+    </div>
+
+</ng-template>
+
+<!-- Contenido -->
+<div class="container pt-1">
+    <div class="row my-4 align-self-center">
+        <div class="col-md-4 order-4 order-md-1 text-sm-center text-md-left">
+            <button class="btn btn-primary" (click)="open(content)">Agregar</button>
+        </div>
+        <div class="col-md-4 order-1 text-center">
+            <h5>Articulos Manufacturados</h5>
+        </div>
+        <div class="col-md-4 order-9">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Denominación</th>
+                        <th scope="col">Tiempo estimado de cocina</th>
+                        <th scope="col">Precio de Venta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let articulo of articulos; index as i" (click)="editarArticulo(articulo,content)">
+                        <td>
+                            {{ articulo.denominacion }}
+                        </td>
+                        <td>{{ articulo.tiempoEstimadoCocina }} minutos</td>
+                        <td>${{ articulo.precioVenta }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

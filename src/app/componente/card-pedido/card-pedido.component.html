@@ -1,0 +1,20 @@
+<div class="card" style="max-width: 100%;margin-bottom:20px;">
+    <h5 class="card-header">Pedido N° {{pedido.id}}</h5>
+    <div class="card-body">
+        <p class="card-text"><b>Fecha: </b>{{pedido.fecha | date:'dd/MM/YYYY'}}</p>
+        <p class="card-text"><b>Cliente: </b>{{pedido.Cliente.apellido}}, {{pedido.Cliente.nombre}}</p>
+        <p class="card-text"><b>Teléfono: </b>{{pedido.Cliente.telefono}}</p>
+        <p class="card-text"><b>Domicilio: </b>{{pedido.Cliente.Domicilio.calle}} {{pedido.Cliente.Domicilio.numero}}, {{pedido.Cliente.Domicilio.localidad}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>Detalle</b></li>
+        <li *ngFor="let detalle of pedido.DetallePedidos " class="list-group-item">{{detalle.cantidad}} x {{(detalle.Articulo === null ? detalle.ArticuloManufacturado.denominacion : detalle.Articulo.denominacion)}}</li>
+
+    </ul>
+    <div class="card-footer">
+        <p class="card-text"><b>Estado del pedido: </b>{{pedido.estado | titlecase}}</p>
+        <p *ngIf="pedido.estado != 'entregado'" class="card-text"><b>Hora estimada de entrega: </b>{{pedido.horaEstimadaFin | date:"shortTime"}} </p>
+        <p class="card-text"><b>Tipo de Envío: </b>{{(pedido.tipoEnvio == 'local' ? "Retira en local" : "Envío a domicilio")}}</p>
+        <a *ngIf="pedido.estado == 'entregado'"  class="btn btn-primary" (click)="verFactura(pedido.id)">Ver Factura</a>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="card" style="max-width: 100%;margin-bottom:20px;">
+    <div class="card-body">
+        <h5 class="card-title">Pedido N° {{pedido.numero}}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>Detalle</b></li>
+        <li *ngFor="let detalle of pedido.DetallePedidos " class="list-group-item">{{detalle.cantidad}} x {{(detalle.Articulo === null ? detalle.ArticuloManufacturado.denominacion : detalle.Articulo.denominacion)}}</li>
+    </ul>
+    <div class="card-body">
+        <p class="card-text"><b>Hora estimada de entrega: {{pedido.horaEstimadaFin | date:"shortTime"}} </b><a (click) ="cambiarHoraEstimada()" type="button" class="btn btn-outline-info">Editar</a></p>
+        <a  class="btn btn-primary" (click) = "cambiarEstadoPedido()" >{{(pedido.estado == 'pendiente' ? 'Preparar' : 'Listo!')}}</a>
+    </div>
+</div>

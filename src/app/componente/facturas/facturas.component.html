@@ -1,0 +1,18 @@
+<div class="container pt-1">
+    <div class="row">
+        <div class="col-sm">
+        </div>
+        <div class="col-sm">
+            <br>
+            <h3>Facturas</h3>
+            <br>
+        </div>
+        <div class="col-sm">
+        </div>
+    </div>
+    <div class="col">
+        <div *ngFor="let factura of facturas">
+            <app-card-factura [factura] ="factura"></app-card-factura>
+        </div>
+    </div>
+</div>

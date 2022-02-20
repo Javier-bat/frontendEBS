@@ -1,0 +1,115 @@
+<!-- Modal Rubro articulo -->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Nuevo Rubro de artículo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formularioRubro" (ngSubmit)="submitRubro(c)">
+            <div class="form-group">
+                <label for="calle">Denominacion</label>
+                <input class="form-control" formControlName="denominacion">
+            </div>
+            <div id="error" class="mb-3 red">{{errorRubro}}</div>
+            <input type="submit" value="Enviar" class="btn btn-primary w-50 ">
+        </form>
+    </div>
+
+</ng-template>
+<!-- Modal articulo -->
+<ng-template #contentArticulo let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Nuevo Artículo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formularioArticulo" (ngSubmit)="submitArticulo(c)">
+            <div class="form-group">
+                <label for="calle">Denominacion</label>
+                <select class="form-control" formControlName="idRubroArticulo">
+                    <option value="">Seleccione un Valor</option>
+                    <ng-container *ngFor="let rubro of rubros; index as i">
+                        <option value="{{rubro.id}}">{{rubro.denominacion}}</option>
+                    </ng-container>
+                </select>
+            </div>
+            <input type="hidden" formControlName="id">
+            <div class="form-group">
+                <label for="calle">Denominacion</label>
+                <input class="form-control" formControlName="denominacion">
+            </div>
+            <div class="form-group">
+                <label for="calle">Precio de compra</label>
+                <input class="form-control" formControlName="precioCompra">
+            </div>
+            <div class="form-group">
+                <label for="calle">Precio de venta</label>
+                <input class="form-control" formControlName="precioVenta">
+            </div>
+            <div class="form-group">
+                <label for="calle">Stock</label>
+                <input class="form-control" formControlName="stockActual">
+            </div>
+            <div class="form-group">
+                <label for="calle">Unidad de medida</label>
+                <input class="form-control" formControlName="unidadMedida">
+            </div>
+            <div class="form-group form-check text-center">
+
+                <input type="checkbox" class="form-check-input" formControlName="esInsumo">
+                <label for="calle">Es Insumo</label>
+            </div>
+            <div id="error" class="mb-3 red">{{errorRubro}}</div>
+            <div class="text-center">
+                <input type="submit" value="Enviar" class="btn btn-primary w-50 ">
+            </div>
+        </form>
+    </div>
+
+</ng-template>
+<!-- Contenido -->
+<div class="container pt-1">
+    <div class="row my-4 align-self-center">
+        <div class="col-md-4 order-4 order-md-1 text-sm-center text-md-left">
+            <button class="btn btn-primary" (click)="open(contentArticulo)">Agregar</button>
+            <button class="btn btn-primary ml-2" (click)="open(content)">Agregar Rubro</button>
+        </div>
+        <div class="col-md-4 order-1 text-center">
+            <h5>Articulos</h5>
+        </div>
+        <div class="col-md-4 order-9">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Denominación</th>
+                        <th scope="col">Precio de Compra</th>
+                        <th scope="col">Precio de Venta</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Unidad de Medida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let articulo of articulos; index as i"
+                        (click)="editarArticulo(contentArticulo,articulo)">
+                        <td>
+                            {{ articulo.denominacion }}
+                        </td>
+                        <td>{{ articulo.precioCompra }}</td>
+                        <td>{{ articulo.precioVenta }}</td>
+                        <td>{{ articulo.stockActual }}</td>
+                        <td>{{ articulo.unidadMedida }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

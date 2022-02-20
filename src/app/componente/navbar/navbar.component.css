@@ -1,0 +1,21 @@
+#carrito{
+    align-items:center;
+  justify-content:center;
+  display:flex;
+  padding:0px;
+  transition: .5s;
+  background: #cecece;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: white;
+    border-radius: 20px;
+    width: 80px;
+  
+}
+#carrito>a>i{
+font-size:1.2rem;
+}
+#carrito>a{
+    transition: .5s;
+    padding:0;
+}

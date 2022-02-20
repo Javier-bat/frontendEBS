@@ -1,0 +1,68 @@
+<!-- Modal Rubro articulo -->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Confirmar pedido</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formulario" (ngSubmit)="submit()">
+            <div class="form-group">
+                <label for="calle">Forma de entrega</label>
+                <select class="form-control" formControlName="tipoEnvio">
+                    <option value="">Seleccione un Valor</option>
+                    <option value="local">Retiro en local</option>
+                    <option value="envio">Envio a domicilio</option>
+                </select>
+            </div>
+            <div id="error" class="mb-3 red"></div>
+            <input type="submit" value="Enviar" class="btn btn-primary w-50 ">
+        </form>
+    </div>
+
+</ng-template>
+
+<div class="container pt-1">
+    <div class="row my-4 align-self-center">
+        <div class="col"></div>
+        <div class="col text-center">
+            <h5>Carrito</h5>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <ul class="list-group mb-5">
+                <li class="list-group-item d-flex align-items-center" *ngFor="let item of items; index as i">
+                    {{item.itemCarta.denominacion}} ({{item.cantidad}} X ${{item.itemCarta.precioVenta}})
+                    <span class="ml-auto">
+                        <div class="btn btn-primary" (click)="eliminar(item)">Eliminar</div>
+                    </span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="row text-center">
+        <div class="col"></div>
+        <div class="col">
+            <h5>Tiempo estimado: {{tiempoEstimado}} minutos</h5>
+            <h5>Subtotal: ${{subtotal}}</h5>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row text-center mt-5">
+        <div class="col"></div>
+        <div class="col">
+            <button class="btn btn-primary" (click)="abrirModal(content)">
+                Confirmar Pedido
+            </button>
+        </div>
+        <div class="col"></div>
+    </div>
+
+</div>

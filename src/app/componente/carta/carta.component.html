@@ -1,0 +1,45 @@
+<!-- Modal Rubro articulo -->
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar articulo</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="formulario" (ngSubmit)="submit()">
+            <div class="form-group">
+                <label for="calle">Cantidad</label>
+                <input class="form-control" formControlName="cantidad">
+            </div>
+            <div id="error" class="mb-3 red"></div>
+            <input type="submit" value="Enviar" class="btn btn-primary w-50 ">
+        </form>
+    </div>
+
+</ng-template>
+
+<div class="container pt-1">
+    <div class="row my-4 align-self-center">
+        <div class="col"></div>
+        <div class="col text-center">
+            <h5>Cartilla de "El Buen Sabor"</h5>
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <ul class="list-group mb-5">
+                <li class="list-group-item d-flex align-items-center" *ngFor="let item of itemsCarta; index as i">
+                    {{item.denominacion}}
+                    <span class="ml-auto">
+                        <div class="btn btn-primary" (click)="abrirModalAgregar(item,content)">Añadir al carrito</div>
+                    </span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+</div>
